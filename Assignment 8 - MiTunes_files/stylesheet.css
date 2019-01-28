@@ -1,0 +1,219 @@
+/*
+.tryThis,.tryDHTML {
+	font-size: large;
+}
+.tryThis:hover {
+	background-image: url("bg_js_test.png");
+}
+.tryDHTML:hover {
+	background-image: url("bg_dhtml_test.png");
+}
+*/
+textarea.displaypara:hover {
+	background-image : url(/corgs/PL/bg_dblclick_open_in_tester.png);
+	background-repeat:no-repeat;
+	background-position:right top;
+}
+textarea.openInTesterMobile {
+	background-image : url(/corgs/PL/bg_click_open_in_tester.png);
+	background-repeat:no-repeat;
+	background-position:right top;
+}
+
+/*CodeMirror editor styling*/
+.tryThis + .cm-s-default:hover {
+	background-image : url(/corgs/PL/bg_dblclick_tester.png);
+	background-repeat:no-repeat;
+	background-position:right top;
+}
+.JS,.DHTML {
+	font-size: large;
+}
+.testerMobile {
+	background-image : url(/corgs/PL/bg_click_tester.png);
+	background-repeat:no-repeat;
+	background-position:right top;
+}
+.cm-s-default {font-size: 16px;}
+
+body {
+	/*background-color: #FFFFFF;*/
+	background-color: #eee;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	/*new*/
+	margin: 1em;
+}
+
+pre {
+	background-color: #cec;
+}
+
+.main_header {
+	/*color: #00CC00;*/
+	color: black;
+}
+.indented {
+	margin-left: 4%;
+} 
+
+/* new stanzas */
+h1, h2 {
+	background-color: #696;
+	border-radius: 0.25em;
+	padding: 0.25em;
+	color: #eee;
+}
+h1 a, h2 a {
+	color: white;
+}
+
+/* new stanza */
+body > p:first-of-type {
+	background-color: white;
+	border-radius: 0.25em;
+	padding: 0.25em;
+}
+
+/* new stanza */
+fieldset {
+	border: 1px dashed black;
+}
+
+/* new stanza */
+textarea {
+	border: 1px solid black;
+	font-family: monospace;
+}
+
+/* new stanza */
+hr { display: none; }
+
+/* new stanza */
+tr:first-child {
+	font-weight: bold;
+}
+
+/* new stanza */
+tr:nth-child(odd) {
+	background-color: #ddd;
+}
+tr:nth-child(even) {
+	background-color: #ccc;
+}
+
+/* new stanza */
+table {
+	border: 1px solid black;
+}
+th {
+	border: 0;
+	background-color: #696;
+	padding: 1em;
+}
+th > a {
+	color: #eee;
+}
+tr {
+	border: 0;
+}
+td {
+	border: 0;
+}
+
+.H6 {
+	margin-left: 4%; 
+	font-family: "Times New Roman";
+	font-size: 12pt; 
+	font-weight: 400;
+}
+.plain {
+	font-weight: 400;
+}
+.big {
+	font-size: larger;
+}
+.large {
+	font-size: large;
+}
+.small {
+	font-size: small;
+}
+.white_bkgnd {
+	background-color: #FFFFFF;
+}
+.grey_bkgnd {
+	background-color: #CCCCFF;
+}
+.blue_bkgnd {
+	background-color: #CCCCFF;
+}
+.pink_bkgnd {
+	background-color: #FFCCCC;
+	border: thin solid #FF99CC;
+}
+.yellow_bkgnd {
+	background-color: lightyellow;
+}
+.green_bkgnd {
+	/*background-color: #CCFFCC;*/
+	background-color: #eee;
+}
+.orange_bkgnd {
+	background-color: #FFCC99;
+}
+.red {
+	color: #FF0000;
+}
+.placelogo {
+	float: left;
+}
+
+.placeheading {
+	float: right;
+	text-align: right;
+	color: #666666;
+}
+.placeheading br { display: none } /* new */
+
+.allclear {
+	clear: both;
+}
+.displaypara {
+	background-color: #FFFFCC;
+	border: solid #996600;
+	width: 60%;
+	margin-right: 20%;
+	margin-left: 20%;
+	padding: 2px;
+}
+.bodystyle {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+.x_small {
+	font-size: x-small;
+}
+.noteheader {
+	background-color: #E0E0E0;
+	margin: 2px;
+	padding: 4px;
+}
+.notebody {
+	background-color: #F0F0F0;
+	margin: 2px;
+	padding: 4px;
+}
+.usernotes {
+	background-color: #D0D0D0;
+}
+
+
+.HTML5 {
+	border: thin solid #0099CC;
+	padding: 0px 10px 0px 10px;
+	margin-top:-1px;
+}
+.HTML5wide {
+	width:100%;
+	border-bottom:thin solid #0099CC;
+	margin-bottom:0px;
+}

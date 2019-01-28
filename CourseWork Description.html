@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<!-- saved from url=(0069)https://co-teach.lboro.ac.uk/corgs/pw3/section8_assess_2016_2017.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link type="text/css" rel="stylesheet" href="./Assignment 8 - MiTunes_files/stylesheet.css">
+<title>Assignment 8 - MiTunes</title>
+<style type="text/css">
+table {
+	border: thick solid black;
+}
+td {
+	border: thin solid black;
+}
+</style>
+</head>
+
+<body class="green_bkgnd">
+<a href="https://co-teach.lboro.ac.uk/corgs/pw3/pw3.htm"><img src="./Assignment 8 - MiTunes_files/pw3_logo.png" alt="pw3 logo" width="132" height="126" border="0" class="placelogo"></a> 
+<div class="placeheading">
+<h1>Section 8:<br>
+  Assessed<br>
+  Assignment A8</h1>
+</div>
+<br class="allclear">
+<h2><a name="assessed" id="assessed"></a>Assessed Assignment A8 - MiTunes</h2>
+<div align="center">
+<p>This assignment is to create a "media player" given structured data describing albums and tracks, together with supporting files providing album artwork and audio files.</p>
+<p>The outline screen design is shown below ...</p>
+<table width="50%">
+  <tbody><tr>
+    <td width="33%" bgcolor="#CCFFFF"><p align="center">&nbsp;</p>
+      <p align="center">Here goes a complete list of albums</p>
+    <p>&nbsp;</p></td>
+    <td width="33%" bgcolor="#CCFFFF"><div align="center">Here goes a list of the tracks on the currently selected album</div></td>
+    <td bgcolor="#CCFFFF"><div align="center">
+      <p>&nbsp;</p>
+      <p>Here goes the details of the currently selected track of the currently selected album, including the album artwork and a button to actually play the track</p>
+      <p>&nbsp;</p>
+    </div></td>
+  </tr>
+  <tr>
+    <td colspan="3" bgcolor="#CCFFFF"><p align="center">&nbsp;</p>
+      <p align="center">Here goes an on-screen, alphabet+space keyboard that can be used to search for tracks</p>
+    <p>&nbsp;</p></td>
+  </tr>
+</tbody></table>
+</div>
+<p align="center">The rest of the specification follows ...</p>
+<p class="displaypara"><strong>MiTunes:</strong> This media player is to use large text to allow it to
+  be used comfortably with just a wireless mouse from 'across the room'.<br>
+  <br>
+  <strong>Data:</strong> The player is to take a file of albums as data. Each
+  album will have a title, an artist name, an artwork filename and a number of
+  tracks. Each track will have a title, an mp3 filename and some lyrics.<br>
+  <br>
+  <strong>Four panes:</strong> The media player is to have four panes. Across the top are three panes side-by-side.
+  On the left is a pane to choose an album from a list of albums. In the middle
+  is a pane to choose a track from the tracks on the chosen album. On the right
+  is a pane which allows the chosen track to be played.<br>
+  <br>
+  <strong>Search pane:</strong> Underneath the top three panes, a fourth pane stretching the width of the screen
+  provides a text search option. Characters can be entered by clicking simulated keyboard buttons. The keyboard only needs to have 26 letters and 'space' - no shift key, no digits, no punctuation, etc. There should be a facility to delete the last character entered (Back1) and to  start the search again from scratch by deleting all the characters entered (Reset).<br>
+  <strong><br>
+  Search algorithm:</strong> The search should be 'live as you type'. After each character is pressed (except the first) a search is made with the current
+  search string. The search is made in the track title and lyrics
+  fields across all albums. It is up to you how the search results are presented to the user - you could re-use one or more of the existing top frames or you could have another (initially invisible/hidden) pane which can be opened/made visible which overlays one or more of the upper panes. The user must be able to select a track from the search results and have it played. The user must be able to 'dismiss' the search results and get back to 'scrolling' through the albums/tracks.<br>
+  <br>
+  <strong>Snapshot:</strong> Here is a <a href="https://co-teach.lboro.ac.uk/corgs/pw3/xml/screenshot.jpg">screen snapshot</a> of something <em class="red">similar</em> to show what the finished
+  media player might look like. Note however that there are some <span class="red">misleading details</span> in this picture - the definitive specification is this document, not the picture.</p>
+<h3>File: MiTunes.zip</h3>
+<p>You are provided with a folder containing data as a zip file - <a href="https://co-teach.lboro.ac.uk/corgs/pw3/MiTunes.zip">MiTunes.zip</a> (Note: this is quite large ~300MB). You should download and unzip this file and write your solution at the top level inside this folder. This folder contains descriptions of all the albums together with image files containing album artwork and also audio files for each track. The 'tracks' are copyright-free recordings of birdsong from the BBC.</p>
+<h3>File: music.js</h3>
+<p>Inside the (unzipped) MiTunes folder you will find the file music.js. The data containing the description of all the albums in javascript/json format is in the file music.js and can be included in your program by including the line</p>
+<blockquote>
+  <p>&lt;script type="text/javascript" src="music.js"&gt;&lt;/script&gt;</p>
+</blockquote>
+<p>The file music.js begins as follows</p>
+<blockquote>
+  <p>var albums = [ .... ]</p>
+</blockquote>
+<p>This will provide you with an initialised global variable called albums. Using this variable you can access each album and each track of each album. Open up the file music.js and study the structure so you can decide when to use array style addressing ( v[...] ) and when to use record style addressing ( v.f ). </p>
+<h3>Folder: audio</h3>
+<p>Inside the MiTunes folder there is also a folder (called audio) of audio tracks.  The audio folder structure comprises artist folders containing albums, where each album folder contains tracks. Each track is duplicated both in .mp3 and .wav forms (this is to get round some current browser restrictions - see below). </p>
+<p>In order to allow the user to play a track, the following HTML5 code should be used, with <em>xxxxx</em> being replaced by the name of the track</p>
+<blockquote>
+  <p>&lt;audio controls='controls'&gt;<br>  
+    &nbsp;&nbsp;&nbsp;&nbsp;&lt;source src='<em>xxxxx</em>.mp3' type='audio/mpeg'&gt;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&lt;source src='<em>xxxxx</em>.wav' type='audio/wav'&gt;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;Your browser does not support the audio element.<br>
+    &lt;/audio&gt;</p>
+</blockquote>
+<p>If the browser you are using supports HTML5 audio (either .mp3 or .wav) you should be able to click a 'play' button on the line below and hear a Robin singing...</p>
+<audio controls="controls">
+&nbsp;&nbsp;&nbsp;&nbsp;<source src="test_audio/Birdsong-Robin.mp3" type="audio/mpeg">
+&nbsp;&nbsp;&nbsp;&nbsp;<source src="test_audio/Birdsong-Robin.wav" type="audio/wav">
+&nbsp;&nbsp;&nbsp;&nbsp;Your browser does not support the audio element.
+</audio>
+<p>[Tested and working: latest versions of Safari, Firefox, Chrome, Opera, Camino on Mac; Firefox,Chrome on Windows]</p>
+<p>[Tested and NOT Working: IE8 on Windows]</p>
+<p>This <a href="http://www.w3schools.com/html/html5_audio.asp">w3Schools page</a> explains the current situation regarding supported audio formats in different browsers in HTML5. Including two alternative audio sources ensures coverage across the major browsers.</p>
+<h3>Folder: artwork</h3>
+<p>Also inside the MiTunes folder there is a folder (called artwork) of album artwork. Consult music.js to find the name of the artwork file (say 'artwk1') and then look in artwork for a corresponding jpeg graphics file (e.g. 'artwk1.jpg')</p>
+<h3>Development environment</h3>
+<p>[Note that although the DHTML
+    tester and WYSIWYG editors can be helpful in trying out ideas, the full solution
+    to this assignment probably needs to be developed using just a text editor
+    and a browser.  </p>
+<p>Your single, self contained web document containing all your code should
+  be saved using the DHTML tester with the exact name A8MiTunes </p>
+
+<h3>Assessment criteria</h3>
+<p>To obtain good marks the scripts will have perform satisfactorily according
+  to the specification above. The scripts will have to make good use of Javascript
+  features introduced so far (including a variety of functions with parameters and local variables).
+  The scripts should make appropriate use of CSS styles. The code should be well laid out and variable names should be carefully chosen.
+  Occasional helpful comments should be provided - include initial
+  comments stating the title &amp; author (name, id, login) of the script.</p>
+<p>You should hand in a description of your program.
+  You will obtain the coversheet via the CASPA system.
+  The description should give the name and purpose of each function.
+  The description should state your level of achievement (how much of the specification
+  you have been able to program), mentioning any special strong or weak points
+  [e.g. note that my script does this ... :-) or, maybe, note that my script
+  does not do this, or does not work if ... :-( ]. 
+  You should describe carefully any part of your program which is not fully specified - e.g. exactly how your search works. 
+  The description should be approximately 2 pages.</p>
+<p>The relative assessment weighting will be scripts 80%, description 20%.</p>
+<h3>Deadline</h3>
+<p>Consult the "Coursework Schedule" or the "cover sheet" for the deadline</p>
+
+
+</body></html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style type="text/css">
+        body {
+            background-color: lavenderblush; /*background color*/
+
+        }
+
+        #P1,
+        #P2,
+        #P3 {
+            position: absolute;
+            box-sizing: border-box;   /*styling for the 3 panes*/
+            width: 300px;
+            font-family: sans-serif;
+            height: 400px;
+        }
+
+        #d1-1-1,
+        #d1-2-1,
+        #d1-3-1 {
+            position: absolute;
+            font-size: 250px;
+            left: 15px;
+            top: 30px;
+        }
+
+        .hc {
+            font-size: 22pt;
+            font-weight: 700;
+            text-align: center;
+            line-height: 50%;
+        }
+
+        #container {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+        }
+
+        #P1 {
+            background-color: limegreen;
+            border: 10px ridge limegreen;
+            left: 0px;
+        }
+
+        #P2 {
+            background-color: orangered;
+            border: 10px ridge orangered;
+            left: 300px;
+        }
+
+        #P3 {
+            background-color: cyan;
+            border: 10px ridge cyan;
+            left: 600px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        #keyboard {
+            position: absolute;
+            box-sizing: border-box;
+            background-color: yellow;      /* aligning and positioning of the keyboard*/
+            border: 10px ridge yellow;
+            width: 900px;
+            height: 400px;
+            top: 410px;
+            left: 0;
+            text-align: center;
+            padding-top: 50px;
+
+        }
+
+        #d1-4-1 {
+            background-color: Orange;
+            border: 10px ridge Orange;
+            width: 550px;
+            height: 200px;
+            margin: auto;
+            margin-top: 30px;
+        }
+
+        .footy {
+            margin-top: 700px;
+            font-size: 16pt;
+            font-family: serif;
+            font-style: italic;
+        }
+
+        .emphasise {
+            font-weight: 800;
+        }
+
+        .key {
+
+            display: inline;
+            height: 80px;
+            width: 50px;
+            background-color: lightgray;               /*making each key seperate and dinstinct for visual aid*/
+            font-family: monospace;
+            font-size: 36px;
+            padding: 7px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            line-height: 50px;
+            border-radius: 5px;
+            border: 1px solid black;
+            box-shadow: 1px 1px 3px solid gray;
+            color: black;
+
+
+        }
+
+        .key:hover {
+            background-color: white;
+            cursor: pointer;
+        }
+
+        select {
+            width: 100%;
+            height: 300px;
+
+
+
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #searchbox {
+
+            margin: 15px;
+        }
+    </style>
+    <script type="text/javascript" src="music.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("load", function() {
+            for (i = 0; i < albums.length; i++) {
+                document.getElementById("album-list").innerHTML += "<option>" + albums[i].title + "</option>";  //an event that acts as soon as page is loaded and lists the options of the albums
+                                                                                                                //by looping through albums accessing the inner html and displaying all of them as options
+            }
+
+        });
+
+        // Function to fill Tracks with the titles from selected Album
+        function populateTracks() {
+            //initialise selected index and track list
+            var albumIndex = document.getElementById("album-list").selectedIndex;
+            var tracklist = document.getElementById("track-list");
+            //clear tracklist
+            tracklist.innerHTML = "";
+            //loop through tracks and append each title
+            for (i = 0; i < albums[albumIndex].tracks.length; i++) {
+                tracklist.innerHTML += "<option value='" + albumIndex + ", " + i + "'>" +
+                    albums[albumIndex].tracks[i].title + "</option>";
+            }
+        }
+        // Function to fill DescriptionTrack with the description from selected Tracks
+        function populateDescription(string) {
+            var albumIndex = parseInt(string.charAt(0));    //this allows us to make sure the search function works by assigning albumindex and trackindex a value.
+            var trackIndex = parseInt(string.charAt(3));
+
+            var album = albums[albumIndex];
+
+            var title = album.tracks[trackIndex].title;        //var title that accesses the title in albums by going into the folder and appending it.
+            document.getElementById("title").innerHTML = title;
+
+            var imgPath = "artwork/" + album.artwork + ".jpg";  //image path is a variable that we assign to the directory needed to reach the images in music.js
+            
+            document.getElementById("track-image").src = imgPath;  //append the image by getting its element by id and assigning it to imgPath variable
+
+            var mp3 = albums[albumIndex].tracks[trackIndex].mp3; // d
+
+            var lyrics = album.tracks[trackIndex].lyrics;        //this variable allows us to access the lyrics in music.js file
+            document.getElementById("lyrics").innerHTML = lyrics;
+
+            var soundPath = "audio/" + album.artist + "/" + album.title + "/" + mp3;  //directory to the music file in music.js
+            document.getElementById("track-audio").src = soundPath;
+
+
+        }
+
+        function clicks(letter) {
+            document.getElementById("searchbox").value += letter; // a function that displays the value of the clicked button  in the searchbox
+            Search();                                             // also runs the search function after every click for consistency
+
+        }
+
+        function ResetClick() {
+            document.getElementById("searchbox").value = "";  //resets the searchbox by turning everything into an empty string
+            Search();
+
+        }
+
+        function BackClick() {
+            var newString = document.getElementById("searchbox").value.slice(0, -1);  //we use the slice function that removes a character from its last position
+            document.getElementById("searchbox").value = newString;                   //searchbox is given the new string which has its end 'sliced'
+            Search();
+
+
+        }
+
+        function match(string, pattern) {               //function match sets string and pattern to lower case and uses search function to check if pattern appears in string
+            string = string.toLowerCase();
+            pattern = pattern.toLowerCase();
+            if (string.search(pattern) == -1) {
+                return false
+            } else return true
+        }
+
+
+        function Search() {
+            var tracklist = document.getElementById("track-list");   //search function that empties the tracks pane every time its used
+            tracklist.innerHTML = "";
+            var pattern = document.getElementById("searchbox").value;  // pattern is assigned the value from the clicked button of the keyboard
+            if (pattern.length <= 1) return;   //this is just to assure one single letter isnt used as pattern
+            for (var i = 0; i < albums.length; i++) {   //two loops to go through tracks and lyrics
+                for (var j = 0; j < albums[i].tracks.length; j++) {
+                    if (match(albums[i].tracks[j].title, pattern) || match(albums[i].tracks[j].lyrics, pattern)) {
+                        tracklist.innerHTML += "<option value='" + i + ", " + j + "'>" + albums[i].tracks[j].title + "</option>"; //if statements that checks that if there is a match place that value as an option in tracks
+                    }
+                }
+            }
+
+
+
+
+
+
+        }
+    </script>
+    <meta charset="UTF-8">  
+    <title>MiTunes</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="column" id="P1">
+            <h1>Albums</h1>
+            <select class="list" id="album-list" multiple onclick="populateTracks()"></select>  <!--we use multiple onclick so all the results remain in the select box-->
+        </div>                                                                                  <!--when clicking a variable initiated populate tracks function-->
+        <div class="column" id="P2">
+            <h1>Tracks</h1>
+            <select class="list" id="track-list" multiple onclick="populateDescription(value)"></select> <!--same as above just instead of tracks initiates the description-->
+        </div>
+        <div class="column" id="P3">
+            <h1>Description Track</h1>
+            <img id="track-image" alt="Track image cover.">
+            <h2 id="title" class="track-title">Title of the Track</h2>
+            <p id="lyrics" class="track-description">Description of the track</p>   <!--contains necessary content to add the images,lyrics and music-->
+            <audio controls='controls' id="track-audio">
+                <source id="mp3" src='xxxxx.mp3' type='audio/mpeg'>
+                <source src='xxxxx.wav' type='audio/wav'>
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+
+    </div>
+    <div id="keyboard">
+        <div>
+            <input id="searchbox" type="text">   <!--keyboard made up of 26 button that initiate a function when clicked and have an assigned value to them-->
+        </div>
+        <div id="row1" class="keyrow">
+            <div class="key" onclick="clicks('Q')">Q</div>
+            <div class="key" onclick="clicks('W')">W</div>
+            <div class="key" onclick="clicks('E')">E</div>
+            <div class="key" onclick="clicks('R')">R</div>
+            <div class="key" onclick="clicks('T')">T</div>
+            <div class="key" onclick="clicks('Y')">Y</div>
+            <div class="key" onclick="clicks('U')">U</div>
+            <div class="key" onclick="clicks('I')">I</div>
+            <div class="key" onclick="clicks('O')">O</div>
+            <div class="key" onclick="clicks('P')">P</div>
+        </div>
+        <div id="row2" class="keyrow">
+            <div class="key" onclick="clicks('A')">A</div>
+            <div class="key" onclick="clicks('S')">S</div>
+            <div class="key" onclick="clicks('D')">D</div>
+            <div class="key" onclick="clicks('F')">F</div>
+            <div class="key" onclick="clicks('G')">G</div>
+            <div class="key" onclick="clicks('H')">H</div>
+            <div class="key" onclick="clicks('J')">J</div>
+            <div class="key" onclick="clicks('K')">K</div>
+            <div class="key" onclick="clicks('L')">L</div>
+        </div>
+        <div id="row3" class="keyrow">
+            <div class="key" onclick="clicks('Z')">Z</div>
+            <div class="key" onclick="clicks('X')">X</div>
+            <div class="key" onclick="clicks('C')">C</div>
+            <div class="key" onclick="clicks('V')">V</div>
+            <div class="key" onclick="clicks('B')">B</div>
+            <div class="key" onclick="clicks('N')">N</div>
+            <div class="key" onclick="clicks('M')">M</div>
+        </div>
+        <div id="row4" class="keyrow">
+            <div class="key" onclick="ResetClick()">Reset</div>  <!--reset has a specially assigned function to it-->
+            <div class="key" onclick="clicks(' ')">Space</div>
+            <div class="key" onclick="BackClick()">Backspace</div> <!--backspace has a specially assigned function to it-->
+        </div>
+    </div>
+</body>
+
+</html>
